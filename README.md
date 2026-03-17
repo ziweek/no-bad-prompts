@@ -83,23 +83,15 @@ Key design decisions:
 - **Parallel execution** — subagents test each persona simultaneously
 - **Automatic improvement** — low scores trigger concrete rewrite suggestions
 
-## Example
+## Examples
+
+### Quick score — a solid prompt
 
 ```
 > /no-bad-prompts:score-prompt "You are a customer service agent. Always greet
   by name. Keep responses under 3 sentences. Never recommend competitors."
 
-## Evaluation Criteria
-1. Name Greeting — Based on: "Always greet by name"
-2. Length Constraint — Based on: "3 sentences or fewer"
-3. Competitor Exclusion — Based on: "Never recommend competitors"
-
-## Personas
-1. Frustrated Customer — "My order is 3 days late. What's going on?"
-2. First-time User — "How do I place my first order?"
-3. Urgent Customer — "Can I get same-day delivery? It's urgent."
-
-## Evaluation Results
+Evaluation Results
 | Criterion           | Score | Evidence                                     |
 |---------------------|-------|----------------------------------------------|
 | Name Greeting       | 5/5   | "Hello Sarah!" — personalized greeting       |
@@ -108,6 +100,34 @@ Key design decisions:
 
 Overall Score: 5.0/5.0
 ```
+
+### Before & After — finding and fixing weaknesses
+
+```
+> /no-bad-prompts:improve-prompt "You are a code review assistant. Review the
+  code and give feedback."
+
+Evaluation Results
+| Criterion              | Score | Evidence                                          |
+|------------------------|-------|---------------------------------------------------|
+| Actionable Feedback    | 2/5   | Feedback is vague: "looks okay" with no specifics |
+| Code Quality Coverage  | 3/5   | Misses security and performance concerns          |
+| Constructive Tone      | 4/5   | Mostly encouraging but inconsistent               |
+
+Overall Score: 3.0/5.0 → improvable
+
+Suggested Rewrite:
+  "You are a code review assistant. Review the submitted code and provide
+   feedback organized into three sections: Correctness (bugs, logic errors),
+   Quality (readability, naming, structure), and Security (injection,
+   authentication, data exposure). For each issue, cite the exact line,
+   explain why it matters, and suggest a concrete fix. Use a constructive
+   tone — lead with what works well before addressing problems."
+
+Overall Score After Rewrite: 4.7/5.0
+```
+
+> See [`examples/`](examples/) for more detailed walkthroughs.
 
 ## Language Support
 
