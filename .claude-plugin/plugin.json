@@ -1,0 +1,16 @@
+{
+  "name": "no-bad-prompts",
+  "version": "0.2.0",
+  "description": "Automated prompt quality evaluation with persona-based testing. Commands: /evaluate-prompt, /plan-criteria, /generate-personas, /score-prompt, /improve-prompt",
+  "author": {
+    "name": "ziweek"
+  },
+  "repository": "https://github.com/ziweek/no-bad-prompts",
+  "license": "MIT",
+  "keywords": [
+    "prompt-engineering",
+    "evaluation",
+    "quality-assurance",
+    "llm"
+  ]
+}

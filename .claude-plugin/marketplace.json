@@ -1,0 +1,14 @@
+{
+  "name": "no-bad-prompts",
+  "description": "Automated prompt quality evaluation - analyze, test, and score your LLM prompts",
+  "owner": {
+    "name": "ziweek"
+  },
+  "plugins": [
+    {
+      "name": "no-bad-prompts",
+      "description": "Evaluate LLM prompt quality with structured multi-step analysis and scoring",
+      "source": "./"
+    }
+  ]
+}
