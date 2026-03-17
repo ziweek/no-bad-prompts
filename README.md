@@ -1,13 +1,24 @@
 # no-bad-prompts
 
-Automated prompt quality evaluation for Claude Code — extract evaluation criteria, generate diverse test personas, execute prompts in parallel, score results with evidence, and suggest improvements. Zero setup, no API keys needed.
+[![GitHub stars](https://img.shields.io/github/stars/ziweek/no-bad-prompts)](https://github.com/ziweek/no-bad-prompts)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)]()
+
+Automated prompt evaluation for Claude Code — test your prompts against diverse personas, score with evidence, and get concrete improvements. One command, zero setup.
 
 > *"There are no bad prompts — only unevaluated ones."*
 
-## Install
+## Quick Start
 
-```
+```bash
+# Install the plugin
 /plugin marketplace add ziweek/no-bad-prompts
+
+# Evaluate any prompt instantly
+/no-bad-prompts:score-prompt "Your system prompt here..."
+
+# Full interactive evaluation with improvement suggestions
+/no-bad-prompts:evaluate-prompt
 ```
 
 ## Skills (1)
@@ -25,6 +36,18 @@ Automated prompt quality evaluation for Claude Code — extract evaluation crite
 - `/no-bad-prompts:generate-personas` — Generate diverse test personas with realistic user requests for a given prompt.
 - `/no-bad-prompts:score-prompt` — Generate personas, execute the prompt against each in parallel, and score results — fast, non-interactive evaluation.
 - `/no-bad-prompts:improve-prompt` — Evaluate a prompt and suggest an improved version with a table of changes and reasons based on scoring feedback.
+
+## Why
+
+- Manual prompt testing misses edge cases
+- Generic evaluation rubrics don't match your specific prompt
+- Testing one scenario at a time is slow and incomplete
+
+no-bad-prompts extracts criteria from YOUR prompt, generates diverse test personas, and runs them all in parallel — so you find problems before your users do.
+
+## Demo
+
+> 🎬 *Terminal recording coming soon — run `/no-bad-prompts:evaluate-prompt` to try it yourself!*
 
 ## How It Works
 
@@ -60,23 +83,15 @@ Key design decisions:
 - **Parallel execution** — subagents test each persona simultaneously
 - **Automatic improvement** — low scores trigger concrete rewrite suggestions
 
-## Example
+## Examples
+
+### Quick score — a solid prompt
 
 ```
 > /no-bad-prompts:score-prompt "You are a customer service agent. Always greet
   by name. Keep responses under 3 sentences. Never recommend competitors."
 
-## Evaluation Criteria
-1. Name Greeting — Based on: "Always greet by name"
-2. Length Constraint — Based on: "3 sentences or fewer"
-3. Competitor Exclusion — Based on: "Never recommend competitors"
-
-## Personas
-1. Frustrated Customer — "My order is 3 days late. What's going on?"
-2. First-time User — "How do I place my first order?"
-3. Urgent Customer — "Can I get same-day delivery? It's urgent."
-
-## Evaluation Results
+Evaluation Results
 | Criterion           | Score | Evidence                                     |
 |---------------------|-------|----------------------------------------------|
 | Name Greeting       | 5/5   | "Hello Sarah!" — personalized greeting       |
@@ -85,6 +100,34 @@ Key design decisions:
 
 Overall Score: 5.0/5.0
 ```
+
+### Before & After — finding and fixing weaknesses
+
+```
+> /no-bad-prompts:improve-prompt "You are a code review assistant. Review the
+  code and give feedback."
+
+Evaluation Results
+| Criterion              | Score | Evidence                                          |
+|------------------------|-------|---------------------------------------------------|
+| Actionable Feedback    | 2/5   | Feedback is vague: "looks okay" with no specifics |
+| Code Quality Coverage  | 3/5   | Misses security and performance concerns          |
+| Constructive Tone      | 4/5   | Mostly encouraging but inconsistent               |
+
+Overall Score: 3.0/5.0 → improvable
+
+Suggested Rewrite:
+  "You are a code review assistant. Review the submitted code and provide
+   feedback organized into three sections: Correctness (bugs, logic errors),
+   Quality (readability, naming, structure), and Security (injection,
+   authentication, data exposure). For each issue, cite the exact line,
+   explain why it matters, and suggest a concrete fix. Use a constructive
+   tone — lead with what works well before addressing problems."
+
+Overall Score After Rewrite: 4.7/5.0
+```
+
+> See [`examples/`](examples/) for more detailed walkthroughs.
 
 ## Language Support
 
@@ -96,7 +139,7 @@ Born from a [LangGraph-based PoC](https://github.com/ziweek/no-bad-prompts) that
 
 ## Author
 
-ziweek
+[ziweek](https://github.com/ziweek)
 
 ## License
 
