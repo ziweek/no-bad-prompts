@@ -11,10 +11,13 @@ Automated prompt evaluation for Claude Code — test your prompts against divers
 ## Quick Start
 
 ```bash
-# Install the plugin
+# 1. Add the marketplace
 /plugin marketplace add ziweek/no-bad-prompts
 
-# Evaluate any prompt instantly
+# 2. Install the plugin
+/plugin install no-bad-prompts@ziweek-no-bad-prompts
+
+# 3. Evaluate any prompt instantly
 /no-bad-prompts:score-prompt "Your system prompt here..."
 
 # Full interactive evaluation with improvement suggestions
